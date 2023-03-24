@@ -4,10 +4,10 @@
   "description": "solo-project",
   "main": "./frontend/index.js",
   "scripts": {
-    "nodemon": "nodemon",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack serve --open",
-    "build": "webpack ."
+    "start": "nodemon ./backend/server.js --open",
+    "build": "webpack .",
+    "dev": "webpack serve --open"
   },
   "repository": {
     "type": "git",

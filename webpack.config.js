@@ -3,10 +3,12 @@ const path = require('path');
 
 module.exports = {
   entry: './frontend/index.js',
-  mode: 'development',
+  mode: 'production',
   output: {
-    path: path.resolve(__dirname, './dist'),
-    filename: 'index_bundle.js',
+    publicPath: 'dist',
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'bundle.js',
+    clean: true
   },
   target: 'web',
   devServer: {
