@@ -4,7 +4,7 @@
         "commonjs": true,
         "es2021": true
     },
-    "extends": ["eslint:recommended", "prettier"],
+    "extends": ["eslint:recommended"],
     "overrides": [
     ],
     "parserOptions": {
@@ -14,7 +14,7 @@
     "rules": {
         "indent":[ 
             "error",
-            2
+            4
         ],
         "no-console": [
             0
@@ -26,7 +26,6 @@
         "linebreak-style": [
             "error",
             "unix"
-        ],
-        "prettier/prettier": ["error"]
+        ]
     }
 }
