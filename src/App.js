@@ -1,15 +1,18 @@
 //App component, will most likely be the top-most component
-
 import React from "react";
-import Button from "./Button.js"
+import ListContainer from "./ListContainer.js"
+
+
 
 const App = () => {
     return (
         <div>
             <h1>
-                Hello world! I am using Rea
+                Welcome 'user'. Here are your lists
             </h1>
-            <Button />
+            <ListContainer />
+            {/* <ListContainer />
+            <ListContainer /> */}
 
         </div>
     )

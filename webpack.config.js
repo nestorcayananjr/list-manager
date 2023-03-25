@@ -15,7 +15,7 @@ module.exports = {
       directory: path.join(__dirname, 'public')
 },
     proxy: {
-      '/': 'http://localhost:8000'
+      '/': 'http://localhost:8000',
     },
     open: true,
     hot: true,
