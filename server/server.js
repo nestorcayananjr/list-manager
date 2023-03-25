@@ -15,7 +15,7 @@ app.get('/lists', (req, res) => {
     } else {
         console.log(err.message);
     }
-    db.end();
+    // db.end();
   })
 })
   
