@@ -2,17 +2,24 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
 module.exports = {
+  entry: './index.js',
   mode: 'development',
-  entry: './frontend/index.js',
   output: {
-    // publicPath: 'dist',
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js'
-    // clean: true
+    path: path.resolve(__dirname, './dist'),
+    filename: 'index_bundle.js',
   },
   target: 'web',
   devServer: {
-    static: './dist'
+    port: '8080',
+    static: {
+      directory: path.join(__dirname, 'public')
+},
+    proxy: {
+      '/': 'http://localhost:8000'
+    },
+    open: true,
+    hot: true,
+    liveReload: true,
   },
   resolve: {
     extensions: ['.js', '.jsx', '.json'],
@@ -20,27 +27,15 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.jsx?/,
-        exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: [
-              '@babel/preset-react',
-              '@babel/preset-env'
-            ]
-          }
-        },
-      }
+        test: /\.(js|jsx)$/, 
+        exclude: /node_modules/, 
+        use: 'babel-loader', 
+      },
     ],
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: "development",
-      template: './index.html'
+      template: path.join(__dirname, 'public', 'index.html')
     })
-  ],
-  // optimization: {
-  //   runtimeChunk: 'single',
-  // }
+  ]
 };
