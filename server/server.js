@@ -3,6 +3,7 @@ const app = express();
 const db = require('./database');
 const path = require('path');
 
+app.use(express.json());
 
 app.get('/', (req, res) => {
   res.status(200).sendFile(path.resolve(__dirname, '../public/index.html'));
@@ -15,10 +16,13 @@ app.get('/lists', (req, res) => {
     } else {
         console.log(err.message);
     }
-    // db.end();
   })
 })
+
+app.put('/lists', (req, res) => {
+  console.log('received put request -->', req.body);
   
+})
 
 app.use('/dist', express.static(path.resolve(__dirname, '../dist')));
 

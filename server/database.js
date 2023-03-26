@@ -14,8 +14,4 @@ client.on("connect", () => {
     console.log("Connected to Database");
 });
 
-client.on("end", () => {
-    console.log("Connection ended");
-});
-
 module.exports = client;

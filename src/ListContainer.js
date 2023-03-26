@@ -1,54 +1,50 @@
 import React, { useEffect } from "react"
 import ListComponent from "./ListComponent"
 import { useState } from "react";
-
-
-// //declaring a storage for the student names
-// let studentNames = [];
-
-// //function to grabbing names to attempt to render
-// const getData = async () => {
-//     const data = await fetch('/lists')
-//     const students = await data.json();
-//     for (let obj of students){
-//         studentNames.push(<li>{obj.first_name + ' ' + obj.last_name}</li>)
-//     }
-//     return;
-// }
-
-// //call the function
-// getData()
-
-
-
-
-// callback functions to edit and delete lists
-
-//implement fetch request
-const editList = () => {
-    console.log('list edited!')
-}
-
-//implement fetch request
-const deleteList = () => {
-    console.log('list deleted!')
-}
+import axios from "axios";
 
 const ListContainer = () => {
-
     const [lists, setLists] = useState(null)
 
-    useEffect(() => {
-        fetch('/lists')
-            .then(res => {
-                // console.log('fetching data via useEffect')
-                return res.json()
-            })
-            .then((data) => {
-                setLists(data)
-            })
-    }, [])
+//implement fetch request and set state
 
+//an object of arrays
+//{8: [8th grade names], 7: [7th grade names], 6: [6th grade names]}
+    useEffect(() => {
+        const totalLists = {}
+        axios.get('/lists').then((res) => {
+            const data = res.data;
+            console.log(data)
+            for (const obj of data){
+                if (!totalLists[obj.grade_level]){
+                    totalLists[obj.grade_level] = [`${obj.first_name} ${obj.last_name}`]
+                } else {
+                    totalLists[obj.grade_level].push(`${obj.first_name} ${obj.last_name}`)
+                }
+            }
+            setLists(prevState => prevState = totalLists)
+        })
+    }, [])
+    
+// // callback functions to edit and delete lists
+// const editList = () => {
+//     axios
+//         .put('/lists', {
+//             id: 1,
+//             first_name: 'Derlyn'
+//         })
+//         .then((res) => {
+//             setLists(res.data)
+//         })
+    
+//     console.log('list edited!')
+// }
+
+// const deleteList = () => {
+//     console.log('list deleted!')
+// }
+
+//return and render
     return(
     <div className = 'listcontainer'>
         {lists && <ListComponent lists={lists}/>}
