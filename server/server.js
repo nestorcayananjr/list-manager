@@ -1,28 +1,18 @@
 const express = require("express");
 const app = express();
-const db = require('./database');
 const path = require('path');
 
 app.use(express.json());
 
-app.get('/', (req, res) => {
-  res.status(200).sendFile(path.resolve(__dirname, '../public/index.html'));
-});
+// app.get('/', (req, res) => {
+//   res.status(200).sendFile(path.resolve(__dirname, '../public/index.html'));
+// });
 
-app.get('/lists', (req, res) => {
-  db.query(`select * from students`, (err,result) => {
-    if (!err){
-      res.status(200).send(result.rows);
-    } else {
-        console.log(err.message);
-    }
-  })
-})
+//routers
+const listRouter = require('../server/routes/lists.js');
 
-app.put('/lists', (req, res) => {
-  console.log('received put request -->', req.body);
-  
-})
+
+app.use('/lists', listRouter);
 
 app.use('/dist', express.static(path.resolve(__dirname, '../dist')));
 
