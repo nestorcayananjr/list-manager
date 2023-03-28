@@ -77,13 +77,14 @@ listController.getByHomeroom = async (req, res, next) => {
 listController.createNewList = async (req, res, next) => {
     const {listType, listOfStudents} = req.body
     let arrayString = JSON.stringify(listOfStudents)
+    console.log(arrayString)
 
     try {
         await db.query(`CREATE TABLE ${listType} (full_name VARCHAR(100))`)
         
         await db.query(`INSERT INTO ${listType} (full_name) SELECT * FROM json_array_elements($1::json)`, [arrayString])
    
-        const result = await db.query(`SELECT * FROM ${listType}`)
+        const result = await db.query(`SELECT TRIM(BOTH '"' FROM full_name) as full_name FROM ${listType}`)
         console.log(result.rows)
         const newList = {};
         for (let obj of result.rows){
