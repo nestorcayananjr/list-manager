@@ -38,7 +38,6 @@ listController.getByGradeLevel = async (req, res, next) => {
      return next() 
     }
 
-
 listController.getByHomeroom = async (req, res, next) => {
     const text = "SELECT first_name || ' ' || last_name AS full_name FROM students WHERE homeroom="
     const {homeroom} = req.params
@@ -75,9 +74,8 @@ listController.getByHomeroom = async (req, res, next) => {
 }
 
 listController.createNewList = async (req, res, next) => {
-    const {listType, listOfStudents} = req.body
+    const {listType, listOfStudents} = req.body;
     let arrayString = JSON.stringify(listOfStudents)
-    console.log(arrayString)
 
     try {
         await db.query(`CREATE TABLE ${listType} (full_name VARCHAR(100))`)
@@ -100,6 +98,20 @@ listController.createNewList = async (req, res, next) => {
     return next();
 }
 
+
+// listController.editList = async (req, res, next) => {
+//     const {listType, listOfStudents} = req.body;
+
+//     try {
+//         await db.query(`UPDATE ${listType} SET listOfStudents=${listOfStudents}`)
+//         db.query(`SELECT * from ${}`)
+//     } catch (error) {
+        
+//     }
+    
+// }
+
+
 module.exports = listController
-//[]
+
 

@@ -8,14 +8,19 @@ app.use(express.json());
 //   res.status(200).sendFile(path.resolve(__dirname, '../public/index.html'));
 // });
 
-//routers
-const listRouter = require('../server/routes/lists.js');
+//declare routers
+const listRouter = require('../server/routes/listRouter.js');
+const studentRouter = require('../server/routes/studentRouter.js')
 
-
+//endpoints
 app.use('/lists', listRouter);
 
+app.use('/students', studentRouter);
+
+//serve the static files from '/dist'
 app.use('/dist', express.static(path.resolve(__dirname, '../dist')));
 
+//listening to the port
 app.listen(8000, () => {
     console.log("listening on port 8000");
 });
