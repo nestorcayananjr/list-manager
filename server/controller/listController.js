@@ -71,7 +71,7 @@ listController.getByHomeroom = async (req, res, next) => {
         console.log(error)
      }
      return next() 
-}
+    }
 
 listController.createNewList = async (req, res, next) => {
     const {listType, listOfStudents} = req.body;
@@ -96,7 +96,7 @@ listController.createNewList = async (req, res, next) => {
         console.log(error)
     }
     return next();
-}
+    }
 
 
 // listController.editList = async (req, res, next) => {
