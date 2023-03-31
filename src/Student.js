@@ -33,9 +33,11 @@ const Student = ({studentName, editStudents, studentDataBase, editButtonClicked,
     }
 
     async function deleteStudent(studentid){
-        console.log('clicked')
-        console.log(studentid)
-        await axios.delete(`/students/studentId/${studentid}`)
+        let text = "Are you sure you want to delete this student from the entire database?";
+        if(confirm(text) === true){
+          await axios.delete(`/students/studentId/${studentid}`)
+          text = "Student Deleted!"  
+        } else text = "Cancelled"
     }
 
     if (editButtonClicked) {

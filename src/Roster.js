@@ -65,7 +65,6 @@ const Roster = ({title, roster, studentDataBase, editStudents, allRosters, title
                 {studentComponents}
             </ol>
             {editButtonComponent()}
-            <button onClick={() => deleteList()}>Delete</button>
         </div>
     )
 }
