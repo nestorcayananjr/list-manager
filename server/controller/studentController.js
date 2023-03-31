@@ -12,10 +12,20 @@ studentController.getStudents = async (req, res, next) => {
     return next()
 }
 
+studentController.getStudentById = async (req, res, next) => {
+    const {studentId} = req.params;
+    try {
+        const result = await db.query((`SELECT * from students where student_id=${studentId}`))
+        res.locals.individualStudent = result.rows;
+    } catch (error) {
+        console.log(error)
+    }
+    return next();
+}
+
 //create a new student
 studentController.createNewStudent = async (req, res, next) => {
     const {
-        id,
         first_name,
         last_name,
         youngest_and_only,
@@ -24,9 +34,11 @@ studentController.createNewStudent = async (req, res, next) => {
     } = req.body;
 
     try {
-        const params = [id, first_name, last_name, youngest_and_only, homeroom];
-        await db.query((`INSERT INTO students (id, first_name, last_name, youngest_and_only, homeroom) VALUES ($1, $2, $3, $4, $5) RETURNING *`), params)
-        await db.query(`UPDATE students SET "${grade_level}"=true WHERE id=${id}`)
+        const params = [first_name, last_name, youngest_and_only, homeroom];
+        const insertAndGetStudent_Id = await db.query((`INSERT INTO students (first_name, last_name, youngest_and_only, homeroom) VALUES ($1, $2, $3, $4) RETURNING student_id`), params)
+        const studentId = insertAndGetStudent_Id.rows[0].student_id;
+        console.log(studentId)
+        await db.query(`UPDATE students SET "${grade_level}"=true WHERE student_id=${studentId}`)
         next()
     } catch (error) {
         console.log(error)
@@ -35,31 +47,36 @@ studentController.createNewStudent = async (req, res, next) => {
 
 //edit a student
 studentController.editStudent = async (req, res, next) => {
+    console.log(req.body)
     const {
-        id,
+        student_id,
         first_name,
         last_name,
         youngest_and_only,
-        grade_level,
+        sixth,
+        seventh,
+        eighth,
         homeroom,
     } = req.body;
 
+    console.log(student_id)
     try {
-        const params = [id, first_name, last_name, youngest_and_only, homeroom];
-        await db.query((`UPDATE students SET (first_name=$2, last_name=$3, youngest_and_only=$4, homeroom=$5) WHERE id=$1 VALUES ($1, $2, $3, $4, $5) RETURNING *`), params);
-        next()
-    } catch (error) {
+        const params = [student_id, first_name, last_name, youngest_and_only, homeroom, sixth, seventh, eighth];
+        await db.query((`UPDATE students SET first_name=$2, last_name=$3, youngest_and_only=$4, homeroom=$5, sixth=$6, seventh=$7, eighth=$8 WHERE student_id=$1;`), params)
+        }   
+    catch (error) {
         console.log(error)
     }
+    return next()
 }
 
 //delete a student
 studentController.deleteStudent = async (req, res, next) => {
-    const {id} = req.body;
+    const {student_id} = req.body;
     try {
         const params = [id];
-        await db.query(("DELETE FROM students WHERE id="), params)
-        next()
+        await db.query((`DELETE FROM students WHERE student_id=$1`), params)
+        return next()
     } catch (error) {
         console.log(error)
     }

@@ -1,4 +1,5 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const NodePolyfillPlugin = require('node-polyfill-webpack-plugin')
 const path = require('path');
 
 module.exports = {
@@ -8,6 +9,7 @@ module.exports = {
     path: path.resolve(__dirname, './dist'),
     filename: 'index_bundle.js',
   },
+  // target: 'node',
   target: 'web',
   devServer: {
     port: '8080',
@@ -36,6 +38,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: path.join(__dirname, 'public', 'index.html')
-    })
+    }),
+    new NodePolyfillPlugin(),
   ]
 };

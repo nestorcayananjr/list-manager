@@ -3,9 +3,20 @@ const router = express.Router();
 const studentController = require ('../controller/studentController.js');
 
 
+//get all the students
 router.get('/', studentController.getStudents, (req, res) => {
     try {
         res.status(200).json(res.locals.students)
+    } catch (error) {
+        res.status(error.status || 500)
+    }
+})
+
+//get by id
+router.get('/studentId/:studentId', studentController.getStudentById, (req, res) => {
+    
+    try {
+        res.status(200).json(res.locals.individualStudent)
     } catch (error) {
         res.status(error.status || 500)
     }
@@ -21,16 +32,16 @@ router.post('/', studentController.createNewStudent, (req, res) => {
 })
 
 //edit a student
-router.patch('/', studentController.editStudent, (req, res) => {
+router.patch('/', studentController.editStudent, studentController.getStudents, (req, res) => {
     try {
-        res.status(200).send('successfully edited a student')
+        res.status(200).json(res.locals.students)
     } catch (error) {
         res.status(error.status || 500)
     }
 })
 
 //delete a student
-router.delete('/', studentController.deleteStudent, (req, res) => {
+router.delete('/', studentController.deleteStudent, studentController.getStudents, (req, res) => {
     try {
         res.status(200).send('successfully deleted student')
     } catch (error) {
