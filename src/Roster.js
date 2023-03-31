@@ -11,16 +11,10 @@ import Student from "./Student.js"
 const Roster = ({title, roster, studentDataBase, editStudents, allRosters, titleOfRosters}) => {
     
     const [editButton, setEditButton] = useState(false)
+    const [hideButton, setHideButton] = useState(false)
 
-/* EDITING THE ROSTER
-[]grab the roster state
-[]clone the state
-[]when you click the button, it opens an input field
-[]unsure of how to grab the information from the fields, but need to make it an array of first and last name
-[]set the state to be that
-[]send a query back to the database to update the database
-*/
 
+//edit the list
     const editList = (bool) => {
         console.log('clicked')
         if (!bool){
@@ -28,9 +22,11 @@ const Roster = ({title, roster, studentDataBase, editStudents, allRosters, title
         } else return setEditButton(false)
     }
     
-    const deleteList = () => {
-        console.log('list deleted!')
-    }
+    const hideList = (bool) => {
+        if (!bool){
+            return setHideButton(true)
+        } else return setHideButton(false)
+    };
 
  //creating studentComponent array to render a Student component for each name
     let studentComponents = [];
@@ -57,16 +53,21 @@ const Roster = ({title, roster, studentDataBase, editStudents, allRosters, title
         } else return <button onClick= {() => editList(true)}> Done Editing </button>
     }
 
-
-    return (
-        <div className = 'listComponent'>
-            <ListTitle title = {title}/>
-            <ol>
-                {studentComponents}
-            </ol>
-            {editButtonComponent()}
-        </div>
-    )
+if (!hideButton){
+        return (
+            <div className = 'listComponent'>
+                <button onClick={() => hideList(hideButton)}>Hide {title} list</button>
+                <ListTitle title = {title}/>
+                <ol>
+                    {studentComponents}
+                </ol>
+                {editButtonComponent()}
+            </div>
+        )
+    } else{
+        return(
+            <button onClick={() => hideList(hideButton)}>Show {title} List</button> 
+        )
+    }
 }
-
 export default Roster
