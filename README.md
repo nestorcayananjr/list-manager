@@ -5,5 +5,3 @@ TODO
 
 Extensions
 [] Styling
-
-Changing this to see how it works
