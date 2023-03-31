@@ -56,12 +56,13 @@ const Roster = ({title, roster, studentDataBase, editStudents, allRosters, title
 if (!hideButton){
         return (
             <div className = 'listComponent'>
-                <button onClick={() => hideList(hideButton)}>Hide {title} list</button>
+                
                 <ListTitle title = {title}/>
                 <ol>
                     {studentComponents}
                 </ol>
                 {editButtonComponent()}
+                <button onClick={() => hideList(hideButton)}>Hide {title} list</button>
             </div>
         )
     } else{
