@@ -72,10 +72,9 @@ studentController.editStudent = async (req, res, next) => {
 
 //delete a student
 studentController.deleteStudent = async (req, res, next) => {
-    const {student_id} = req.body;
+    const {studentId} = req.params
     try {
-        const params = [id];
-        await db.query((`DELETE FROM students WHERE student_id=$1`), params)
+        await db.query((`DELETE FROM students WHERE student_id=${studentId}`))
         return next()
     } catch (error) {
         console.log(error)

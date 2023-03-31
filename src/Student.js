@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, {useState} from "react"
-// import { deleteStudent } from "../server/controller/studentController";
+
 
 const Student = ({studentName, editStudents, studentDataBase, editButtonClicked, student_id}) => {
 
@@ -33,7 +33,9 @@ const Student = ({studentName, editStudents, studentDataBase, editButtonClicked,
     }
 
     async function deleteStudent(studentid){
-        await axios.delete('/students', {student_id:student_id})
+        console.log('clicked')
+        console.log(studentid)
+        await axios.delete(`/students/studentId/${studentid}`)
     }
 
     if (editButtonClicked) {
@@ -45,7 +47,7 @@ const Student = ({studentName, editStudents, studentDataBase, editButtonClicked,
                 onChange={(event) => setName(event.target.value)} 
                 type='text'/>
                 <button onClick={() => handleButtonClick(name)}> Save Changes </button>
-                {/* <button onClick ={() => deleteStudent(student_id)}> Delete Student</button>  */}
+                <button onClick ={() => deleteStudent(student_id)}> Delete Student</button> 
             </li>
         </ span>
         )

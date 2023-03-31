@@ -41,9 +41,9 @@ router.patch('/', studentController.editStudent, studentController.getStudents, 
 })
 
 //delete a student
-router.delete('/', studentController.deleteStudent, studentController.getStudents, (req, res) => {
+router.delete('/studentId/:studentId', studentController.deleteStudent, studentController.getStudents, (req, res) => {
     try {
-        res.status(200).send('successfully deleted student')
+        res.status(200).send(res.locals.students)
     } catch (error) {
         res.status(error.status || 500)
     }
