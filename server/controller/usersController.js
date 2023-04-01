@@ -28,7 +28,7 @@ usersController.registerUser = async (req, res, next) => {
     const {name, username, password} = req.body;
 
     try {
-        const params = [name, username, password, 230];
+        const params = [name, username, password, 2390];
         await db.query((`INSERT INTO users (first_name, username, password, id) VALUES ($1, $2, $3, $4) RETURNING *`), params)
         next()
     } catch (error) {

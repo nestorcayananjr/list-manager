@@ -160,7 +160,7 @@ const HomePage = () => {
                     <label for="last_name">Last Name</label>    
                     <input id="last_name" type='text' onChange={(e) => setLastName(e.target.value)}/>
                 </div>
-
+                <br></br>
                 <div>
                     <label for="6">6th Grade</label>                   
                     <input type="checkbox" id="6" onChange={(e) => setGradeLevel('sixth')}/>
@@ -171,18 +171,20 @@ const HomePage = () => {
                     <label for="8">8th Grade</label>
                     <input type="checkbox" id="8" onChange={(e) => setGradeLevel('eighth')}/>
                 </div>
-
+                <br></br>
                 <div>
-                    <label for="homeroomA">A</label>
+                    <label for="homeroomA">Homeroom A</label>
                     <input type="checkbox" id="homeroomA" onChange={(e) => setHomeRoom('A')}/>
 
-                    <label for="homeroomB">B</label>
+                    <label for="homeroomB">Homeroom B</label>
                     <input type="checkbox" id="homeroomB" onChange={(e) => setHomeRoom('B')}/>
                 </div>
+                <br></br>
                 <div>
                 <label for="youngest_and_only">Youngest/Only?</label>
                     <input type="checkbox" id="youngest_and_only" onChange={(e) => setYoungestAndOnly(e.target.value)}/>
                 </div>
+                <br></br>
             <button onClick={() => setCreateStudentClicked(false)}> Go Back </button>
             <button onClick={() => createNewStudent()}>Create Student</button> 
             </div>

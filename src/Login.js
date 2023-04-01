@@ -17,6 +17,7 @@ function Login (){
             username: userName,
             password: password
         })
+        console.log(data.data.first_name)
         setVerification(data.data.verification)
     }
 
@@ -24,12 +25,13 @@ function Login (){
 
     return (
         <>
-            <label for='first_name'>First Name: </label>
-            <input id='first_name' type='text' defaultValue='First Name' onChange={(e) => setFirstName(e.target.value)}/>
+        <h1>List Manager</h1>
             <label for='username'>Username:</label>
             <input id='username' type='text' defaultValue='Username' onChange={(e) => userName = e.target.value}/>
+            <br></br>
             <label for='password'>Password: </label> 
-            <input id='password' type='password'  onChange={(e) => password = e.target.value}/> 
+            <input id='password' type='password'  onChange={(e) => password = e.target.value}/>
+            <br></br> 
             <button onClick={() => handleClick()}> Login </button>
             <Link to='/register'>Register</Link>
         </> 

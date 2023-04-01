@@ -23,10 +23,13 @@ const Registration = () => {
             <h1> Register Here</h1>
             <label for='first_name'>First Name: </label>
             <input id='first_name' type='text' defaultValue='First Name' onChange={(e) => firstName = e.target.value}/>
+            <br></br>
             <label for='username'>Username:</label>
             <input id='username' type='text' defaultValue='Username' onChange={(e) => userName = e.target.value}/>
+            <br></br>
             <label for='password'>Password: </label> 
             <input id='password' type='password'  onChange={(e) => password = e.target.value}/> 
+            <br></br>
             <button onClick={() => handleClick()}> Register </button>
             <Link to='/'>Go back to login page</Link> 
         </>
