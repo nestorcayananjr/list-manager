@@ -11,7 +11,7 @@ router.post('/', usersController.verifyUser, (req, res)=> {
 })
 
 
-router.post('/', usersController.registerUser, (req, res) => {
+router.put('/', usersController.registerUser, (req, res) => {
     try {
         res.status(200).send('succesfully created a user')
     } catch (error) {

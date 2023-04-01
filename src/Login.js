@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import { Form, Link, Route, Routes } from "react-router-dom"
+import { Form, Link, Route, Routes, Navigate, useNavigate, redirect } from "react-router-dom"
 import HomePage from "./Homepage";
 import { useState, useEffect } from "react"
 
@@ -8,18 +8,20 @@ import { useState, useEffect } from "react"
 function Login (){
 
     const [firstName, setFirstName] = useState(null);
-    const [verification, setVerification] = useState(false);
+    const [verification, setVerification] = useState(null);
     let userName;
     let password; 
     
     async function handleClick() {
-        console.log(userName, password)
         const data = await axios.post('/users', {
             username: userName,
             password: password
         })
-        console.log(data.data)
+        setVerification(data.data.verification)
     }
+
+    if(verification) return <Navigate to='/home' />
+
     return (
         <>
             <label for='first_name'>First Name: </label>
@@ -29,6 +31,7 @@ function Login (){
             <label for='password'>Password: </label> 
             <input id='password' type='password'  onChange={(e) => password = e.target.value}/> 
             <button onClick={() => handleClick()}> Login </button>
+            <Link to='/register'>Register</Link>
         </> 
     )
 }

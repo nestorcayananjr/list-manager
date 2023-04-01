@@ -4,7 +4,7 @@ import HomePage from './Homepage.js'
 import Login from "./Login.js";
 import { Route, Routes } from "react-router-dom";
 import ProtectedRoutes from "./ProtectedRoutes.jsx";
-import Register from "./Register.js"
+import Registration from "./Registration.js"
 
 
 //props: like arguments that are passed to app. cannot be changed inside a component. is updated outside the component
@@ -17,9 +17,9 @@ const App = () => {
     return(
         <Routes>
             <Route path='/' element={<Login />} />
-            <Route path='/home' element={<HomePage />} />
-            <Route path='/register' element={<Register />} />
             
+            <Route path='/home' element={<HomePage />} />
+            <Route path='/register' element={<Registration />} />
         </Routes>
     )
 }

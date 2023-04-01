@@ -1,7 +1,6 @@
 TODO
-[] Edit and Delete on the Frontend
-[] functions that edit the database, needs to be passed down
-[] Login Page backend and frontend
+[] Login Page gets correct data, need to set the state, and allow user to access homepage
+[] register user front and backend
 
 Extensions
 [] Styling
