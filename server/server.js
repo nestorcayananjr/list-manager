@@ -12,11 +12,13 @@ app.get('/', (req, res) => {
 const listRouter = require('../server/routes/listRouter.js');
 const studentRouter = require('../server/routes/studentRouter.js')
 const tableRouter = require('../server/routes/tableRouter.js')
+const usersRouter = require('../server/routes/usersRouter.js')
 
 //endpoints
 app.use('/table', tableRouter)
 app.use('/students', studentRouter);
 app.use('/lists', listRouter);
+app.use('/users', usersRouter)
 
 //serve the static files from '/dist'
 app.use('/dist', express.static(path.resolve(__dirname, '../dist')));

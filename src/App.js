@@ -1,6 +1,10 @@
 //App component, will most likely be the top-most component
 import React from "react";
 import HomePage from './Homepage.js'
+import Login from "./Login.js";
+import { Route, Routes } from "react-router-dom";
+import ProtectedRoutes from "./ProtectedRoutes.jsx";
+import Register from "./Register.js"
 
 
 //props: like arguments that are passed to app. cannot be changed inside a component. is updated outside the component
@@ -11,9 +15,12 @@ import HomePage from './Homepage.js'
 //state: what does it need to update inside the component? Possibly nothing?
 const App = () => {
     return(
-        <div>
-            <HomePage />
-        </div>
+        <Routes>
+            <Route path='/' element={<Login />} />
+            <Route path='/home' element={<HomePage />} />
+            <Route path='/register' element={<Register />} />
+            
+        </Routes>
     )
 }
 
